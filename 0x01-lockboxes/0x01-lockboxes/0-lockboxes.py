@@ -1,24 +1,27 @@
 #!/usr/bin/python3
-"""Lock Boxes"""
+"""
+You have n number of locked boxes in front of you.
+Each box is numbered sequentially
+from 0 to n - 1 and each box may
+contain keys to the other boxes.
+"""
 
 
 def canUnlockAll(boxes):
     """
-    Determine if all boxes can be unlocked.
+     a method that determines if all the boxes can be opened.
 
-    Args:
-        boxes (list of list of int): A list where each element
-
-    Returns:
-        bool: True if all boxes can be unlocked, False otherwise.
+    :param boxes:
+    :return: True or False
     """
-    unlocked = set()
-    queue = [0]
-    unlocked.add(0)
-    while queue:
-        current_box = queue.pop(0)
-        for key in boxes[current_box]:
-            if key < len(boxes) and key not in unlocked:
-                unlocked.add(key)
-                queue.append(key)
-    return len(unlocked) == len(boxes)
+    if not boxes or type(boxes) is not list:
+        return False
+
+    unlocked = [0]
+    for n in unlocked:
+        for key in boxes[n]:
+            if key not in unlocked and key < len(boxes):
+                unlocked.append(key)
+    if len(unlocked) == len(boxes):
+        return True
+    return False
